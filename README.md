@@ -1,5 +1,5 @@
 # pygame-chess
-# two player chess in python with Pygame!
+# chess with AI in python with Pygame!
 import pygame
 import random
 pygame.init()
