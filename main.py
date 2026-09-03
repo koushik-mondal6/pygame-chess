@@ -1,4 +1,4 @@
-# two player chess in python with Pygame!
+# chess with AI in python with Pygame!
 import pygame
 import random
 pygame.init()
@@ -451,9 +451,9 @@ def computer_move():
     turn_step = 0
     selection = 100
     valid_moves = []
-    # ============================================================
+    
 # STEP 2 - LEGAL CHESS MOVES
-# ============================================================
+
 
 def is_square_attacked(square, attacking_color):
     """
@@ -762,10 +762,6 @@ def draw_game_over():
         (210, 240)
     )
 # main game loop
-# ============================================================
-# MAIN GAME LOOP
-# ============================================================
-
 black_options = get_legal_moves(
     black_pieces,
     black_locations,
@@ -802,21 +798,9 @@ while run:
         valid_moves = check_valid_moves()
         draw_valid(valid_moves)
 
-    # ========================================================
-    # EVENTS
-    # ========================================================
-
     for event in pygame.event.get():
-
-        # ----------------------------------------------------
-        # QUIT
-        # ----------------------------------------------------
         if event.type == pygame.QUIT:
             run = False
-
-        # ----------------------------------------------------
-        # WHITE PLAYER MOVE
-        # ----------------------------------------------------
         if (
             event.type == pygame.MOUSEBUTTONDOWN
             and event.button == 1
@@ -829,16 +813,9 @@ while run:
 
             click_coords = (x_coord, y_coord)
 
-            # -----------------------------------------------
-            # FORFEIT
-            # -----------------------------------------------
             if click_coords == (8, 8) or click_coords == (9, 8):
                 winner = 'black'
                 game_over = True
-
-            # -----------------------------------------------
-            # SELECT WHITE PIECE
-            # -----------------------------------------------
             elif click_coords in white_locations:
 
                 selection = white_locations.index(click_coords)
@@ -848,9 +825,6 @@ while run:
 
                 valid_moves = check_valid_moves()
 
-            # -----------------------------------------------
-            # MOVE SELECTED WHITE PIECE
-            # -----------------------------------------------
             elif (
                 selection != 100
                 and click_coords in valid_moves
@@ -890,10 +864,6 @@ while run:
                         captured_black_index
                     )
 
-                # -------------------------------------------
-                # RECALCULATE LEGAL MOVES
-                # -------------------------------------------
-
                 black_options = get_legal_moves(
                     black_pieces,
                     black_locations,
@@ -906,20 +876,12 @@ while run:
                     'white'
                 )
 
-                # -------------------------------------------
-                # CHANGE TO COMPUTER TURN
-                # -------------------------------------------
-
                 turn_step = 2
                 selection = 100
                 valid_moves = []
 
                 # Check black check/checkmate/stalemate
                 check_game_status()
-
-        # ====================================================
-        # COMPUTER MOVE
-        # ====================================================
 
         if (
             not game_over
@@ -952,11 +914,7 @@ while run:
 
             selection = 100
             valid_moves = []
-
-        # ====================================================
         # RESTART GAME
-        # ====================================================
-
         if (
             event.type == pygame.KEYDOWN
             and game_over
@@ -1017,10 +975,7 @@ while run:
                 'white'
             )
 
-    # ========================================================
     # GAME OVER SCREEN
-    # ========================================================
-
     if game_over:
         draw_game_over()
 
